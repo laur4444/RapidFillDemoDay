@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "217948764277",
+    "firebase_url": "https://rapidfilldemoday.firebaseio.com",
+    "project_id": "rapidfilldemoday",
+    "storage_bucket": "rapidfilldemoday.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217948764277:android:7ff274f357853d0f",
+        "android_client_info": {
+          "package_name": "net.ddns.rapidfill.rapidfilldemoday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217948764277-qdcoa4l040il95n43fi54hetojqehmkr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.ddns.rapidfill.rapidfilldemoday",
+            "certificate_hash": "d4dd6c4ff47baadf376c51a8375a7ad4c71ff7d8"
+          }
+        },
+        {
+          "client_id": "217948764277-35ni47kj3nh41g336f1sffjc2th78t60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbbilDmRqKHRwu7BIYuyBZif__G4G2dpc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217948764277-35ni47kj3nh41g336f1sffjc2th78t60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
