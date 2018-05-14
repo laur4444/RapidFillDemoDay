@@ -52,6 +52,8 @@ public class ProductDetails extends AppCompatActivity {
         product.setName(intent.getStringExtra("product_name"));
         product.setDescription(intent.getStringExtra("product_description"));
 
+        collapsingToolbarLayout.setTitle(product.getName());
+
         product_name.setText(product.getName());
         product_description.setText(product.getDescription());
         product_price.setText(product.getPrice());
