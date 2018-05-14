@@ -109,6 +109,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private void changeScene(){
         change(MainMenu.class);
+        loadingDialog.dismiss();
     }
 
     private void change(Class myClass) {
