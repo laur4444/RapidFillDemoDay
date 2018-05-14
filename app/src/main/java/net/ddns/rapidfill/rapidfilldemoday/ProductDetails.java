@@ -57,5 +57,7 @@ public class ProductDetails extends AppCompatActivity {
         product_price.setText(product.getPrice());
 
         Glide.with(this).load(product.getImage()).into(product_image);
+
+        //Add product name to toolbar
     }
 }

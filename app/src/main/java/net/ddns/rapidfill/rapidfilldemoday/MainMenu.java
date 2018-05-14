@@ -1,5 +1,7 @@
 package net.ddns.rapidfill.rapidfilldemoday;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.RecoverySystem;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -22,6 +24,7 @@ public class MainMenu extends AppCompatActivity {
 
     private EditText searchField;
     private Button searchButton;
+    private Button testBtn;
 
     private RecyclerView resultList;
 
@@ -38,6 +41,8 @@ public class MainMenu extends AppCompatActivity {
         searchButton = findViewById(R.id.search_button);
         resultList = findViewById(R.id.result_list);
 
+        testBtn = findViewById(R.id.test_btn);
+
         resultList.setHasFixedSize(true);
         resultList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -47,6 +52,13 @@ public class MainMenu extends AppCompatActivity {
 
                 String searchText = searchField.getText().toString();
                 firebaseProductSearch(searchText);
+            }
+        });
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent test = new Intent(MainMenu.this, Home.class );
+                MainMenu.this.startActivity(test);
             }
         });
 
