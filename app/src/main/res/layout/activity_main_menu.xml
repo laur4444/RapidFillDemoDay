@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="net.ddns.rapidfill.rapidfilldemoday.MainMenu">
 
 
@@ -15,7 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="17dp"
         android:layout_marginTop="55dp"
-        android:text="Search" />
+        android:text="Search"
+        android:visibility="invisible"/>
 
     <EditText
         android:id="@+id/search_field"
@@ -27,7 +28,8 @@
         android:layout_marginLeft="26dp"
         android:layout_marginStart="26dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:visibility="invisible"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/result_list"
@@ -35,7 +37,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/search_field"
+        android:layout_below="@+id/searchBar"
         android:layout_marginTop="23dp">
 
     </android.support.v7.widget.RecyclerView>
@@ -44,8 +46,21 @@
         android:id="@+id/test_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/search_button"
+        android:layout_alignEnd="@+id/search_button"
+        android:layout_alignRight="@+id/search_button"
+        android:layout_alignTop="@+id/search_field"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
         android:text="Test" />
+
+    <com.mancj.materialsearchbar.MaterialSearchBar
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:mt_hint="Search"
+        app:mt_speechMode="false"></com.mancj.materialsearchbar.MaterialSearchBar>
 
 </RelativeLayout>

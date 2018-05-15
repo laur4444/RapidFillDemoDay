@@ -6,11 +6,15 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -25,7 +29,7 @@ public class ProductDetails extends AppCompatActivity {
     FloatingActionButton btnCart;
     ElegantNumberButton numberButton;
 
-
+    final Product product = new Product();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +50,13 @@ public class ProductDetails extends AppCompatActivity {
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 
         Intent intent = getIntent();
-        Product product = new Product();
+
         product.setPrice(intent.getStringExtra("product_price"));
         product.setImage(intent.getStringExtra("product_image"));
         product.setName(intent.getStringExtra("product_name"));
         product.setDescription(intent.getStringExtra("product_description"));
+        product.Test();
+
 
         collapsingToolbarLayout.setTitle(product.getName());
 
@@ -60,6 +66,13 @@ public class ProductDetails extends AppCompatActivity {
 
         Glide.with(this).load(product.getImage()).into(product_image);
 
-        //Add product name to toolbar
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth user = FirebaseAuth.getInstance();
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).child("Cart");
+                db.push().setValue(product);
+            }
+        });
     }
 }

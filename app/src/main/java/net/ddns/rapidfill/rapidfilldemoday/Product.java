@@ -1,5 +1,9 @@
 package net.ddns.rapidfill.rapidfilldemoday;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Laurentiu on 5/13/2018.
  */
@@ -10,6 +14,8 @@ public class Product {
     public String description;
     public String image;
     public String price;
+    public ArrayList<String> attributes = new ArrayList<>();
+    public ArrayList<String> values = new ArrayList<>();
 
 
     public Product(String name, String description, String image, String price) {
@@ -17,8 +23,14 @@ public class Product {
         this.description = description;
         this.image = image;
         this.price = price;
+
     }
 
+    public void Test() {
+        attributes.add("Poseison");
+        attributes.add("Wolfram");
+        attributes.add("Herman");
+    }
 
     public String getPrice() {
         return price;
