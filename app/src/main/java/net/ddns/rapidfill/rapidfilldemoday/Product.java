@@ -14,9 +14,15 @@ public class Product {
     public String description;
     public String image;
     public String price;
-    public ArrayList<String> attributes = new ArrayList<>();
-    public ArrayList<String> values = new ArrayList<>();
+    public String quantity;
 
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
 
     public Product(String name, String description, String image, String price) {
         this.name = name;
@@ -25,13 +31,6 @@ public class Product {
         this.price = price;
 
     }
-
-    public void Test() {
-        attributes.add("Poseison");
-        attributes.add("Wolfram");
-        attributes.add("Herman");
-    }
-
     public String getPrice() {
         return price;
     }

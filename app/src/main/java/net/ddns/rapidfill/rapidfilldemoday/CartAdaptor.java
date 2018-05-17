@@ -20,6 +20,7 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
 
     public CartViewHolder(View itemView) {
         super(itemView);
+        itemView.setOnClickListener(this);
         product_name = itemView.findViewById(R.id.cart_item_name);
         product_count = itemView.findViewById(R.id.cart_item_count);
         product_price = itemView.findViewById(R.id.cart_item_price);
@@ -28,7 +29,7 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-
+        //show details
     }
 }
 

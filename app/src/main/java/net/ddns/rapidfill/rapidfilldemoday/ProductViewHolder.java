@@ -39,6 +39,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         this.product = product;
         product_name.setText(product.getName());
         Glide.with(context).load(product.getImage()).into(product_image);
+
     }
 
 
@@ -49,6 +50,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         productDetail.putExtra("product_price", product.getPrice());
         productDetail.putExtra("product_description", product.getDescription());
         productDetail.putExtra("product_image", product.getImage());
+        productDetail.putExtra("product_quantity", product.getQuantity());
         context.startActivity(productDetail);
     }
 }

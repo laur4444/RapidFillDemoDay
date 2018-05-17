@@ -9,4 +9,11 @@
     tools:showIn="@layout/app_bar_home">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/google_maps"
+        android:scaleType="centerCrop"
+        />
+
 </android.support.constraint.ConstraintLayout>
