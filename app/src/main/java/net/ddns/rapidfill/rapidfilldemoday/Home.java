@@ -3,6 +3,7 @@ package net.ddns.rapidfill.rapidfilldemoday;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.Voice;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -79,6 +80,10 @@ public class Home extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_voice) {
+            Intent intent = new Intent(this, VoiceRecognition.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

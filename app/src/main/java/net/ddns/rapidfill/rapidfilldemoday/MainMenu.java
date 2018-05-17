@@ -50,8 +50,6 @@ public class MainMenu extends AppCompatActivity {
         productAdapter = new productArrayAdaptor();
 
 
-        searchField = findViewById(R.id.search_field);
-        searchButton = findViewById(R.id.search_button);
 
 
         searchButton.setOnClickListener(new View.OnClickListener() {
