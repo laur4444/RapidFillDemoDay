@@ -79,6 +79,18 @@ public class ProductDetails extends AppCompatActivity {
             }
         });
 
+        numberButton.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
+            @Override
+            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
+                int price = Integer.valueOf(product.getPrice());
+                price /= oldValue;
+                price *= newValue;
+                product.setPrice(price + "");
+                product.setQuantity(newValue + "");
+                product_price.setText(product.getPrice());
+            }
+        });
+
 
         collapsingToolbarLayout.setTitle(product.getName());
 

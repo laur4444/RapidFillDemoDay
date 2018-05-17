@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -15,13 +16,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Cart extends AppCompatActivity {
 
     DatabaseReference db;
     FirebaseAuth user;
-    RecyclerView resultCart;
     Context context;
+    ArrayList<Product> products;
+    ListView resultList;
+    ProductCartArrayAdapter productAdapter;
 
 
     @Override
@@ -29,12 +35,14 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         user = FirebaseAuth.getInstance();
-
-        resultCart = findViewById(R.id.listCart);
-        resultCart.setHasFixedSize(true);
-        resultCart.setLayoutManager(new LinearLayoutManager(this));
+        db = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("Cart");
 
         context = this;
+
+        products = new ArrayList<>();
+        resultList = findViewById(R.id.result_list);
+        productAdapter = new ProductCartArrayAdapter();
+
         showCart();
 
         db.addChildEventListener(new ChildEventListener() {
@@ -66,23 +74,23 @@ public class Cart extends AppCompatActivity {
     }
 
     private void showCart() {
-        db = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("Cart");
-        Query products = db.orderByChild("name").startAt("");
 
-        FirebaseRecyclerAdapter<Product, ProductViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Product, ProductViewHolder>(
-                Product.class,
-                R.layout.product_layout,
-                ProductViewHolder.class,
-                products
-
-        ) {
+        db.orderByChild("name").addValueEventListener(new ValueEventListener() {
             @Override
-            protected void populateViewHolder(ProductViewHolder viewHolder, Product model, int position) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                products.clear();
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Product item = postSnapshot.getValue(Product.class);
+                    products.add(item);
+                }
+                productAdapter.setParameters(Cart.this, products);
+                resultList.setAdapter(productAdapter);
+            }
 
-                viewHolder.setDetails(context, model);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
-        };
-        resultCart.setAdapter(firebaseRecyclerAdapter);
+        });
     }
 }

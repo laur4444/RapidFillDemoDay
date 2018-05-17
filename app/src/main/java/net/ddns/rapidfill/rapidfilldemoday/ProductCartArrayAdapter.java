@@ -2,11 +2,9 @@ package net.ddns.rapidfill.rapidfilldemoday;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,13 +12,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Laurentiu on 5/17/2018.
  */
 
-public class productArrayAdaptor extends BaseAdapter {
+public class ProductCartArrayAdapter extends BaseAdapter{
 
     Context context;
     ArrayList<Product> products;
@@ -50,16 +47,18 @@ public class productArrayAdaptor extends BaseAdapter {
     public View getView(int position, View mView, ViewGroup parent) {
 
         if(mView == null) {
-            mView = LayoutInflater.from(context).inflate(R.layout.product_layout, parent, false);
+            mView = LayoutInflater.from(context).inflate(R.layout.product_cart_layout, parent, false);
         }
 
         final Product product = products.get(position);
 
         TextView product_name = mView.findViewById(R.id.product_name);
         TextView product_price = mView.findViewById(R.id.product_price);
+        TextView product_quantity = mView.findViewById(R.id.product_quantity);
         ImageView product_image = mView.findViewById(R.id.product_image);
         product_name.setText(product.getName());
         product_price.setText(product.getPrice() + " Lei");
+        product_quantity.setText(product.getQuantity() + " bucati");
         Glide.with(context).load(product.getImage()).into(product_image);
 
         mView.setOnClickListener(new View.OnClickListener() {

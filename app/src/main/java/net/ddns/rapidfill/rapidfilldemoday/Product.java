@@ -29,7 +29,7 @@ public class Product {
         this.description = description;
         this.image = image;
         this.price = price;
-
+        quantity = "1";
     }
     public String getPrice() {
         return price;
