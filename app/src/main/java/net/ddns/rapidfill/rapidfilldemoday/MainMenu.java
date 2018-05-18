@@ -10,6 +10,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,9 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
-
-    private EditText searchField;
-    private Button searchButton;
 
     //private RecyclerView resultList;
     private ListView resultList;
@@ -49,16 +50,6 @@ public class MainMenu extends AppCompatActivity {
         loadSuggest();
         productAdapter = new productArrayAdaptor();
 
-
-
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String searchText = searchField.getText().toString();
-                firebaseProductSearch(searchText);
-            }
-        });
 
         //Search
         materialSearchBar = findViewById(R.id.searchBar);

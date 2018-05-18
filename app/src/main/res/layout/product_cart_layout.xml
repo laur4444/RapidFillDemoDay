@@ -59,6 +59,15 @@
                     android:text="20 lei"
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/product_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/product_price"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="Delete" />
             </RelativeLayout>
 
         </LinearLayout>

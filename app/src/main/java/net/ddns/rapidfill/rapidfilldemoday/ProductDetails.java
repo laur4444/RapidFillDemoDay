@@ -82,7 +82,7 @@ public class ProductDetails extends AppCompatActivity {
         numberButton.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-                int price = Integer.valueOf(product.getPrice());
+                float price = Float.valueOf(product.getPrice());
                 price /= oldValue;
                 price *= newValue;
                 product.setPrice(price + "");

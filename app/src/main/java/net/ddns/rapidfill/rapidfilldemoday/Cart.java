@@ -37,7 +37,7 @@ public class Cart extends AppCompatActivity {
     ProductCartArrayAdapter productAdapter;
 
     TextView textView_total;
-    Integer total = 0;
+    float total = 0;
 
     Button btn_send;
 
@@ -103,7 +103,7 @@ public class Cart extends AppCompatActivity {
         });
     }
 
-    private void showCart() {
+    public void showCart() {
 
         db.orderByChild("name").addValueEventListener(new ValueEventListener() {
             @Override
@@ -113,11 +113,11 @@ public class Cart extends AppCompatActivity {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Product item = postSnapshot.getValue(Product.class);
                     products.add(item);
-                    total += Integer.valueOf(item.getPrice());
+                    total += Float.valueOf(item.getPrice());
                 }
-                productAdapter.setParameters(Cart.this, products);
+                productAdapter.setParameters(Cart.this, products, true, db);
                 resultList.setAdapter(productAdapter);
-                textView_total.setText(total.toString());
+                textView_total.setText(total + "");
             }
 
             @Override
