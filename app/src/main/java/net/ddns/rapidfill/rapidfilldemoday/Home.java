@@ -106,6 +106,10 @@ public class Home extends AppCompatActivity
             Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.action_toolbar) {
+            Intent intent = new Intent(this, ToolbarTest.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

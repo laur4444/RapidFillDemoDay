@@ -16,4 +16,9 @@
         android:orderInCategory="100"
         android:title="Maps"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_toolbar"
+        android:orderInCategory="100"
+        android:title="Toolbar"
+        app:showAsAction="never" />
 </menu>
