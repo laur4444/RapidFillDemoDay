@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -43,6 +43,5 @@ dependencies {
     compile 'com.github.mancj:MaterialSearchBar:0.7.1'
     compile 'info.hoang8f:fbutton:1.0.5'
     compile 'com.google.android.gms:play-services:11.8.0'
-
 }
 apply plugin: 'com.google.gms.google-services'
