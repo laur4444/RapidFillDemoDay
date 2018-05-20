@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/infoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/transparentBlack"
+        android:text="Benzinaria OMV " />
+
+    <TextView
+        android:id="@+id/benzinarieTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="27 lei"
+        android:textColor="@color/transparentBlack"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnComanda"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Comanda"
+        android:textAlignment="center"
+        android:textColor="@color/transparentBlack" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Cancel"
+        android:textAlignment="center"
+        android:textColor="@color/transparentBlack" />
+
+
+</LinearLayout>
