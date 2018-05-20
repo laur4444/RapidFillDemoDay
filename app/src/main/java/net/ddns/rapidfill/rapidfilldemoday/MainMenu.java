@@ -1,9 +1,14 @@
 package net.ddns.rapidfill.rapidfilldemoday;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +43,7 @@ public class MainMenu extends AppCompatActivity {
     List<String> suggestList = new ArrayList<>();
     MaterialSearchBar materialSearchBar;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,11 @@ public class MainMenu extends AppCompatActivity {
         products = new ArrayList<>();
         loadSuggest();
         productAdapter = new productArrayAdaptor();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Products");
+        setSupportActionBar(toolbar);
+
 
 
         //Search
@@ -82,8 +93,6 @@ public class MainMenu extends AppCompatActivity {
         materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
-                String s = enabled ? "enabled" : "disabled";
-                    Toast.makeText(MainMenu.this, "Search " + s, Toast.LENGTH_SHORT).show();
                if(!enabled)
                    firebaseProductSearch("");
             }
@@ -147,5 +156,27 @@ public class MainMenu extends AppCompatActivity {
         }
         productAdapter.setParameters(MainMenu.this, results);
         resultList.setAdapter(productAdapter);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_back) {
+            this.finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

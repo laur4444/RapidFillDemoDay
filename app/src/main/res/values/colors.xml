@@ -9,4 +9,10 @@
 
     <color name="btnActive">#45e90e</color>
 
+    <color name="background">#005186</color>
+
+    <color name="actionBar">#2a5e1b</color>
+
+    <color name="accent">#198b02</color>
+
 </resources>

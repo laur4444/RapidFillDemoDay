@@ -125,7 +125,7 @@ public class SpeechActions {
     void GetInput(String input) {
         input = input.toLowerCase();
         Toast.makeText(context, input, Toast.LENGTH_SHORT).show();
-        if(input.contains("insert")) {
+        if(input.contains("insert") || input.contains("insect") ) {
             StringTokenizer st = new StringTokenizer(input);
             while(st.hasMoreTokens()) {
                 Product product = Search(st.nextToken());
@@ -133,9 +133,10 @@ public class SpeechActions {
                     AddToCart(product);
                     //Toast.makeText(context, "Added to cart " + product.getName(), Toast.LENGTH_SHORT).show();
                     toSpeech.speak("I have added " + product.getName() + " to your cart!", TextToSpeech.QUEUE_ADD, null);
-                    break;
+                    return;
                 }
             }
+            toSpeech.speak("I didn't find this product!", TextToSpeech.QUEUE_ADD, null);
             return;
         }
         if(input.contains("remove")) {
@@ -160,7 +161,9 @@ public class SpeechActions {
             db_orders.setValue(order);
             db_cart.removeValue();
             toSpeech.speak("I have sent the order to your Gas Station! You will pick it up in RESPOND ORDER GET TIME minutes!", TextToSpeech.QUEUE_ADD, null);
+            return;
         }
+        toSpeech.speak("I didn't quite got what you said!", TextToSpeech.QUEUE_ADD, null);
     }
 
 }

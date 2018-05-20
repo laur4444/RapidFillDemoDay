@@ -6,6 +6,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ public class ProductDetails extends AppCompatActivity {
 
         numberButton = findViewById(R.id.number_button);
         btnCart = findViewById(R.id.btnCart);
+
 
 
         product_name = findViewById(R.id.detailed_product_name);
@@ -92,7 +94,8 @@ public class ProductDetails extends AppCompatActivity {
         });
 
 
-        collapsingToolbarLayout.setTitle(product.getName());
+        //collapsingToolbarLayout.setTitle(product.getName());
+        collapsingToolbarLayout.setTitle("Product details");
 
         product_name.setText(product.getName());
         product_description.setText(product.getDescription());
@@ -105,7 +108,7 @@ public class ProductDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 product.setQuantity(numberButton.getNumber().toString());
-                String toShow = product.getName() + " a fost adaugat in cos!";
+                String toShow = product.getName() + " was added into your cart!";
                 Toast.makeText(v.getContext(), toShow , Toast.LENGTH_SHORT).show();
                 db.child(product.getName()).setValue(product);
                 finish();
