@@ -97,7 +97,7 @@ public class Home extends AppCompatActivity
         speech = new SpeechActions(toSpeech, context);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.hide();
+        //fab.hide();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,6 +172,7 @@ public class Home extends AppCompatActivity
             requestPermissions(new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET
             }, 10);
+            Toast.makeText(this, "Nu ai voie!", Toast.LENGTH_SHORT).show();
             return;
         } else {
             configureLocation();
@@ -180,7 +181,18 @@ public class Home extends AppCompatActivity
 
     }
 
-    public void configureLocation(){
+    public void configureLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Toast.makeText(this, "Nu ai voie!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         locationManager.requestLocationUpdates("gps", 5000, 5, locationListener);
     }
 
@@ -219,19 +231,8 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.action_voice) {
-            Intent intent = new Intent(this, VoiceRecognition.class);
-            startActivity(intent);
-        }
-        if (id == R.id.action_maps) {
-            Intent intent = new Intent(this, MapsActivity.class);
-            startActivity(intent);
-        }
         if (id == R.id.action_toolbar) {
-            Intent intent = new Intent(this, ToolbarTest.class);
+            Intent intent = new Intent(this, CasierOrders.class);
             startActivity(intent);
         }
 
@@ -253,13 +254,10 @@ public class Home extends AppCompatActivity
             Intent cart = new Intent(context, Cart.class);
             startActivity(cart);
         } else if (id == R.id.nav_orders) {
-
+            Intent cart = new Intent(context, ViewOrders.class);
+            startActivity(cart);
         } else if (id == R.id.nav_log_out) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            this.finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -309,12 +307,15 @@ public class Home extends AppCompatActivity
         // Add a marker in Sydney, Australia, and move the camera.
         double[] latitudine = {44.420, 44.431};
         double[] longitudine = {26.088, 26.110};
-        String[] numeBenzinarie = {"Strada Gazelei", "Bulevardul Corneliu Coposu"};
+        String[] numeBenzinarie = {"OMV Strada Gazelei", "OMV Bulevardul Corneliu Coposu"};
         for (int i = 0 ; i < 2 ; ++i){
             LatLng coord = new LatLng(latitudine[i], longitudine[i]);
             Marker marker = mMap.addMarker(new MarkerOptions().position(coord).title(numeBenzinarie[i]));
             marker.setTag("" + i + "_" + numeBenzinarie[i]);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coord, 16));
+
         }
+
         mMap.setOnMarkerClickListener(this);
     }
 
@@ -322,7 +323,7 @@ public class Home extends AppCompatActivity
     public boolean onMarkerClick(Marker marker) {
         String oras = (String) marker.getTag();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 16));
-        confirmCommand(oras);
+        //confirmCommand(oras);
         return false;
     }
 

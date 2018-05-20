@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gas_station"
+    android:background="@drawable/random_benzinarie"
+    android:scaleType="centerCrop"
     tools:context=".Login">
 
     <com.google.android.gms.common.SignInButton

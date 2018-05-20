@@ -35,6 +35,7 @@ public class Cart extends AppCompatActivity {
 
     DatabaseReference db;
     DatabaseReference dbOrders;
+    DatabaseReference db_user_orders;
     FirebaseAuth user;
     Context context;
     ArrayList<Product> products;
@@ -55,6 +56,7 @@ public class Cart extends AppCompatActivity {
         user = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("Cart");
         dbOrders = FirebaseDatabase.getInstance().getReference().child("Orders").push();
+        db_user_orders = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).child("Orders").push();
         context = this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -76,8 +78,12 @@ public class Cart extends AppCompatActivity {
                     return;
                 }
                 Date now = Calendar.getInstance().getTime();
-                Order order = new Order(now, products);
+                Order order = new Order(now, user.getCurrentUser().getEmail(), products, dbOrders.getKey());
                 dbOrders.setValue(order);
+
+                Order order2 = new Order(now, user.getCurrentUser().getEmail(),products, db_user_orders.getKey());
+                db_user_orders.setValue(order2);
+
                 db.removeValue();
             }
         });

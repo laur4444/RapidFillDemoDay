@@ -1,6 +1,7 @@
 package net.ddns.rapidfill.rapidfilldemoday;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class SpeechActions {
     DatabaseReference db_products;
     DatabaseReference db_cart;
     DatabaseReference db_orders;
+    DatabaseReference db_user_orders;
 
     FirebaseAuth user;
     TextToSpeech toSpeech;
@@ -44,6 +46,7 @@ public class SpeechActions {
         db_products = FirebaseDatabase.getInstance().getReference("Products");
         db_cart = db.child("Users").child(user.getUid()).child("Cart");
         db_orders = FirebaseDatabase.getInstance().getReference().child("Orders").push();
+        db_user_orders = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).child("Orders").push();
 
         db_cart.addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,7 +128,7 @@ public class SpeechActions {
     void GetInput(String input) {
         input = input.toLowerCase();
         Toast.makeText(context, input, Toast.LENGTH_SHORT).show();
-        if(input.contains("insert") || input.contains("insect") ) {
+        if(input.contains("insert") || input.contains("insect") || input.contains("instead") || input.contains("instrument") || input.contains("desert")) {
             StringTokenizer st = new StringTokenizer(input);
             while(st.hasMoreTokens()) {
                 Product product = Search(st.nextToken());
@@ -157,8 +160,11 @@ public class SpeechActions {
                 return;
             }
             Date now = Calendar.getInstance().getTime();
-            Order order = new Order(now, products_cart);
+            Order order = new Order(now, user.getCurrentUser().getEmail(), products_cart, db_orders.getKey());
             db_orders.setValue(order);
+            Order order2 = new Order(now, user.getCurrentUser().getEmail(), products_cart, db_user_orders.getKey());
+            db_user_orders.setValue(order2);
+
             db_cart.removeValue();
             toSpeech.speak("I have sent the order to your Gas Station! You will pick it up in RESPOND ORDER GET TIME minutes!", TextToSpeech.QUEUE_ADD, null);
             return;
